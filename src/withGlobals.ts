@@ -4,31 +4,28 @@ import type {
   StoryContext,
 } from "@storybook/types";
 import { useEffect, useGlobals } from "@storybook/preview-api";
-import { PARAM_KEY } from "./constants";
+import {PARAM_GLOBAL_KEY, PARAM_STORY_KEY} from "./constants";
 
 export const withGlobals = (
   StoryFn: StoryFunction<Renderer>,
   context: StoryContext<Renderer>
 ) => {
   const [globals] = useGlobals();
-  const myAddon = globals[PARAM_KEY];
-  // Is the addon being used in the docs panel
+  const addonGlobalParameters = globals[PARAM_GLOBAL_KEY];
+  const showStackblitzButton = context.parameters[PARAM_STORY_KEY]?.showButton ?? true;
   const isInDocs = context.viewMode === "docs";
-  const { theme } = context.globals;
-
-  console.log('>>>', myAddon, context)
 
   useEffect(() => {
     const rootElementForContent: HTMLElement = document.querySelector(`#anchor--${context.id} .docs-story`);
-    if (isInDocs && !!rootElementForContent) {
-      displayToolState(rootElementForContent, context);
+    if (isInDocs && !!rootElementForContent && !!addonGlobalParameters?.stackblitzAdditionalDependency && showStackblitzButton) {
+      displayToolState(rootElementForContent, addonGlobalParameters, context);
     }
-  }, [myAddon, theme]);
+  }, [addonGlobalParameters]);
 
   return StoryFn();
 };
 
-function displayToolState(rootElement: HTMLElement, context: StoryContext) {
+function displayToolState(rootElement: HTMLElement, globalParameters: unknown, context: StoryContext) {
   let stackblitzButton = document.createElement('button');
   stackblitzButton.style.setProperty('position', 'absolute');
   stackblitzButton.style.setProperty('bottom', '0');
@@ -49,14 +46,16 @@ function displayToolState(rootElement: HTMLElement, context: StoryContext) {
 
   rootElement.appendChild(stackblitzButton);
 
-  console.log('context: ', context)
+  console.log('globals: ', globalParameters)
 
-  if(!!context.parameters?.docs?.source?.code){
+  const stackblitzCode = context.parameters[PARAM_STORY_KEY]?.code ?? context.parameters?.docs?.source?.code;
+
+  if(!!stackblitzCode){
     stackblitzButton.style.setProperty('cursor', 'pointer');
     stackblitzButton.innerHTML = `Open in <span style="color: #358CFE;">Stackblitz</span>`;
 
     stackblitzButton.addEventListener('click', (event)=>{
-      console.log('Run stackblitz >>>')
+      console.log('Run stackblitz >>>', stackblitzCode);
       // StackblitzHandler.openStackblitz(context, context.parameters.stackblitzAdditionalDependency);
     })
   }else{

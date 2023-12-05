@@ -9,14 +9,13 @@
  * https://storybook.js.org/docs/react/writing-stories/decorators
  */
 import type { Renderer, ProjectAnnotations } from "@storybook/types";
-import { PARAM_KEY } from "./constants";
+import { PARAM_GLOBAL_KEY } from "./constants";
 import { withGlobals } from "./withGlobals";
 
 const preview: ProjectAnnotations<Renderer> = {
   decorators: [withGlobals],
   globals: {
-    [PARAM_KEY]: {
-        showButton: true,
+    [PARAM_GLOBAL_KEY]: {
         stackblitzAdditionalDependency: {
           "@ironsource/fusion-ui": '7.0.0-rc.1'
         }

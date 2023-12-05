@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 
 // @ts-ignore
 import { Button } from "./Button";
+import {PARAM_STORY_KEY} from "../src/constants";
 
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 const meta: Meta<typeof Button> = {
@@ -12,11 +13,6 @@ const meta: Meta<typeof Button> = {
     backgroundColor: { control: "color" },
   },
   tags: ["autodocs"],
-  parameters: {
-    myAddonParameter: {
-      showButton: true,
-    },
-  },
 };
 
 export default meta;
