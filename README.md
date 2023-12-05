@@ -1,9 +1,9 @@
-# Storybook Addon storybook-addon-stackblitz
-Open story example (angular only for now) on StackBlitz
+# Storybook Addon storybook-addon-stackblitz-angular
+Open story example (angular only) on StackBlitz
 
 - Install addon
 ```bash
-npm i -D @ironsource/storybook-addon-stackblitz
+npm i -D @ironsource/storybook-addon-stackblitz-angular
 ```
 - Add addon to your .storybook/main.js file
 ```js
@@ -11,7 +11,7 @@ module.exports = {
   ...
   addons: [
     ...
-    '@ironsource/storybook-addon-stackblitz'
+    '@ironsource/storybook-addon-stackblitz-angular'
   ],
   ...
 };
@@ -20,6 +20,13 @@ module.exports = {
 - In your project .storybook/preview.js file add dependency for your components in property ***stackblitzAdditionalDependency*** lib:
 ```ts
 export const parameters = {
+    globals: {
+        stackblitzGlobals: {
+            stackblitzAdditionalDependency: {
+                '@ironsource/fusion-ui': '7.0.0'
+            }
+        }
+    },
     actions: {argTypesRegex: '^on[A-Z].*'},
     controls: {
         matchers: {
@@ -28,13 +35,10 @@ export const parameters = {
         }
     },
     docs: {inlineStories: true},
-    stackblitzAdditionalDependency: {
-        "@ironsource/fusion-ui": '5.1.0-rc.5'
-    },
     ...
 };
 ```
-- In your component story you need put standalone (angular 14+) component wrapper code in Story.parameters.docs.source.
+- In your component story you need put standalone component wrapper code in Story.parameters.docs.source.
 - Example:
 ```ts
 parameters: {
