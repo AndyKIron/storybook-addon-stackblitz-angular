@@ -16,46 +16,51 @@ export const withGlobals = (
   const isInDocs = context.viewMode === "docs";
   const { theme } = context.globals;
 
-  useEffect(() => {
-    // Execute your side effect here
-    // For example, to manipulate the contents of the preview
-    const selector = isInDocs
-      ? `#anchor--${context.id} .sb-story`
-      : "#storybook-root";
+  console.log('>>>', myAddon, context)
 
-    displayToolState(selector, {
-      myAddon,
-      isInDocs,
-      theme,
-    });
+  useEffect(() => {
+    const rootElementForContent: HTMLElement = document.querySelector(`#anchor--${context.id} .docs-story`);
+    if (isInDocs && !!rootElementForContent) {
+      displayToolState(rootElementForContent, context);
+    }
   }, [myAddon, theme]);
 
   return StoryFn();
 };
 
-function displayToolState(selector: string, state: any) {
-  const rootElements = document.querySelectorAll(selector);
+function displayToolState(rootElement: HTMLElement, context: StoryContext) {
+  let stackblitzButton = document.createElement('button');
+  stackblitzButton.style.setProperty('position', 'absolute');
+  stackblitzButton.style.setProperty('bottom', '0');
+  stackblitzButton.style.setProperty('right', '90px');
+  stackblitzButton.style.setProperty('border', '1px solid rgba(0,0,0,.1)');
+  stackblitzButton.style.setProperty('border-bottom', 'none');
+  stackblitzButton.style.setProperty('border-radius', '4px 4px 0 0');
+  stackblitzButton.style.setProperty('padding', '4px 10px');
+  stackblitzButton.style.setProperty('background', 'white');
+  stackblitzButton.style.setProperty(
+      'font-family',
+      '"Nunito Sans",-apple-system,".SFNSText-Regular","San Francisco",BlinkMacSystemFont,"Segoe UI","Helvetica Neue",Helvetica,Arial,sans-serif',
+  );
+  stackblitzButton.style.setProperty('font-weight', '700');
+  stackblitzButton.style.setProperty('font-size', '12px');
+  stackblitzButton.style.setProperty('text-decoration', 'none');
+  stackblitzButton.style.setProperty('line-height', '16px');
 
-  rootElements.forEach((rootElement) => {
-    let preElement = rootElement.querySelector<HTMLPreElement>(
-      `${selector} pre`
-    );
+  rootElement.appendChild(stackblitzButton);
 
-    if (!preElement) {
-      preElement = document.createElement("pre");
-      preElement.style.setProperty("margin-top", "2rem");
-      preElement.style.setProperty("padding", "1rem");
-      preElement.style.setProperty("background-color", "#eee");
-      preElement.style.setProperty("border-radius", "3px");
-      preElement.style.setProperty("max-width", "600px");
-      preElement.style.setProperty("overflow", "scroll");
-      rootElement.appendChild(preElement);
-    }
+  console.log('context: ', context)
 
-    preElement.innerText = `This snippet is injected by the withGlobals decorator.
-It updates as the user interacts with the ⚡ or Theme tools in the toolbar above.
+  if(!!context.parameters?.docs?.source?.code){
+    stackblitzButton.style.setProperty('cursor', 'pointer');
+    stackblitzButton.innerHTML = `Open in <span style="color: #358CFE;">Stackblitz</span>`;
 
-${JSON.stringify(state, null, 2)}
-`;
-  });
+    stackblitzButton.addEventListener('click', (event)=>{
+      console.log('Run stackblitz >>>')
+      // StackblitzHandler.openStackblitz(context, context.parameters.stackblitzAdditionalDependency);
+    })
+  }else{
+    stackblitzButton.style.setProperty('color', '#678099');
+    stackblitzButton.innerHTML = `No Stackblitz available`;
+  }
 }
