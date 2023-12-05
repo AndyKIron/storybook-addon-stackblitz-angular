@@ -1,6 +1,6 @@
 {
   "name": "storybook-addon-stackblitz",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Used for open storybook angular component story example in Stacjblitz",
   "keywords": [
     "storybook-addon", "angular", "stackblitz"
