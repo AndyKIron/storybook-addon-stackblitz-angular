@@ -1,5 +1,5 @@
 {
-  "name": "@ironsource/storybook-addon-stackblitz",
+  "name": "@ironsource/storybook-addon-stackblitz-angular",
   "version": "1.0.0-rc.0",
   "description": "Used for open storybook angular component story example in Stacjblitz",
   "keywords": [
