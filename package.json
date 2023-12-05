@@ -1,16 +1,16 @@
 {
-  "name": "storybook-addon-kit",
+  "name": "storybook-addon-stackblitz",
   "version": "0.0.0",
-  "description": "everything you need to build a Storybook addon",
+  "description": "Used for open storybook angular component story example in Stacjblitz",
   "keywords": [
-    "storybook-addons"
+    "storybook-addon", "angular", "stackblitz", "storybook-addons"
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/storybookjs/storybook-addon-kit"
+    "url": "https://github.com/AndyKIron/storybook-addon-stackblitz"
   },
   "license": "MIT",
-  "author": "package-author",
+  "author": "Andy Kononenko <andy.kono@gmail.com>",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
@@ -32,7 +32,6 @@
     "*.d.ts"
   ],
   "scripts": {
-    "postinstall": "node scripts/welcome.js",
     "clean": "rimraf ./dist",
     "prebuild": "npm run clean",
     "build": "tsup",
@@ -89,9 +88,9 @@
     "previewEntries": ["src/preview.ts"]
   },
   "storybook": {
-    "displayName": "Addon Kit",
+    "displayName": "storybook-addon-stackblitz",
     "supportedFrameworks": [
-      "supported-frameworks"
+      "angular"
     ],
     "icon": "https://user-images.githubusercontent.com/321738/63501763-88dbf600-c4cc-11e9-96cd-94adadc2fd72.png"
   }
