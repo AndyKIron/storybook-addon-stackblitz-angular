@@ -90,7 +90,7 @@ const INDEX_HTML = `
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>My app</title>
+    <title>Example of component using</title>
     <meta charset="UTF-8" />
   </head>
   <body>
@@ -107,32 +107,32 @@ import { FusionStoryWrapperComponent } from './wrapper.component';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [WrapperComponent],
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'],
+  imports: [FusionStoryWrapperComponent],
+  template: \`<div class="component-wrapper">
+  <!--FusionUI component story-->
+  <fusion-story-wrapper></fusion-story-wrapper>
+  <!--FusionUI component story-->
+</div>\`,
 })
 export class AppComponent {}
 
 bootstrapApplication(AppComponent).catch((err) => console.error(err));
 `;
-const STYLES_CSS = `/* Add application styles & imports to this file! */`;
-const APP_COMPONENT_HTML = `<div class="component-wrapper">
-  <!--FusionUI component story-->
-  <fusion-story-wrapper></fusion-story-wrapper>
-  <!--FusionUI component story-->
-</div>`;
-const APP_COMPONENT_CSS = `:host {
+const STYLES_CSS = `
+body {
   display: block;
   position: relative;
+  margin: 8px;
   font-family: HelveticaNeue, helvetica;
   font-size: 14px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
 }
+
 .component-wrapper {
   margin: 25px;
-}
+} 
 `;
 const WRAPPER_COMPONENT = `import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
@@ -151,9 +151,7 @@ export const ANGULAR_PROJECT_PLAYGROUND = {
     'tsconfig.json': TSCONFIG_JSON,
     'src/main.ts': MAIN_TS,
     'src/index.html': INDEX_HTML,
-    'src/styles.css': STYLES_CSS,
-    'src/app.component.html': APP_COMPONENT_HTML,
-    'src/app.component.css': APP_COMPONENT_CSS,
+    'src/global_styles.css': STYLES_CSS,
     'src/wrapper.component.ts': WRAPPER_COMPONENT
   },
   title: "FusionUI {component} example",
