@@ -1,7 +1,7 @@
 {
   "name": "@ironsource/storybook-addon-stackblitz-angular",
   "version": "1.0.1",
-  "description": "Used for open storybook angular component story example in Stacjblitz",
+  "description": "Used for open storybook angular component story example in Stackblitz",
   "keywords": [
     "storybook-addon",
     "angular",
@@ -9,7 +9,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/AndyKIron/storybook-addon-stackblitz"
+    "url": "https://github.com/AndyKIron/storybook-addon-stackblitz-angular"
   },
   "license": "MIT",
   "author": "Andy Kononenko <andy.kono@gmail.com>",
@@ -99,7 +99,7 @@
     ]
   },
   "storybook": {
-    "displayName": "storybook-addon-stackblitz",
+    "displayName": "storybook-addon-stackblitz-angular",
     "supportedFrameworks": [
       "angular"
     ],
