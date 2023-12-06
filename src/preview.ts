@@ -10,10 +10,10 @@
  */
 import type { Renderer, ProjectAnnotations } from "@storybook/types";
 import { PARAM_GLOBAL_KEY } from "./constants";
-import { withGlobals } from "./withGlobals";
+import { stackblitzButton } from "./stackblitzButton";
 
 const preview: ProjectAnnotations<Renderer> = {
-  decorators: [withGlobals],
+  decorators: [stackblitzButton],
   globals: {
     [PARAM_GLOBAL_KEY]: {
         stackblitzAdditionalDependency: {

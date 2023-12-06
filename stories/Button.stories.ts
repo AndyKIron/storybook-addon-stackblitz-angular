@@ -18,13 +18,14 @@ const meta: Meta<typeof Button> = {
 export default meta;
 type Story = StoryObj<typeof Button>;
 
-// More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 export const Primary: Story = {
-  // More on args: https://storybook.js.org/docs/react/writing-stories/args
   args: {
     primary: true,
     label: "Button",
   },
+  parameters:{
+    stackblitzStory: {},
+  }
 };
 /*
 export const Secondary: Story = {
